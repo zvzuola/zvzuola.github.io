@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="创建数据库调用open方法，如果数据库已经存在则打开，不存在就会创建数据库。调用后返回一个IDBRequest对象。 ==注意：IndexedDB 数据库都按照同源策略（相同的协议、域名、端口）进行存储==12345678910let dbconst request = window.indexedDB.open(databaseName, version)request.onerror = (e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="indexedDB的简单学习">
+<meta property="og:url" content="http://yoursite.com/2018/06/05/indexedDB/index.html">
+<meta property="og:site_name" content="威少">
+<meta property="og:description" content="创建数据库调用open方法，如果数据库已经存在则打开，不存在就会创建数据库。调用后返回一个IDBRequest对象。 ==注意：IndexedDB 数据库都按照同源策略（相同的协议、域名、端口）进行存储==12345678910let dbconst request = window.indexedDB.open(databaseName, version)request.onerror = (e">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-05T06:28:25.909Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="indexedDB的简单学习">
+<meta name="twitter:description" content="创建数据库调用open方法，如果数据库已经存在则打开，不存在就会创建数据库。调用后返回一个IDBRequest对象。 ==注意：IndexedDB 数据库都按照同源策略（相同的协议、域名、端口）进行存储==12345678910let dbconst request = window.indexedDB.open(databaseName, version)request.onerror = (e">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/05/indexedDB/"/>
+
+
+
+
+
+  <title>indexedDB的简单学习 | 威少</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">威少</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">前端开发工程师</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/05/indexedDB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="威少">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="威少">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">indexedDB的简单学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-05T14:24:27+08:00">
+                2018-06-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><p>调用<code>open</code>方法，如果数据库已经存在则打开，不存在就会创建数据库。调用后返回一个<code>IDBRequest</code>对象。</p>
+<p>==注意：IndexedDB 数据库都按照同源策略（相同的协议、域名、端口）进行存储==<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let db</span><br><span class="line">const request = window.indexedDB.open(databaseName, version)</span><br><span class="line">request.onerror = (e) =&gt; &#123;&#125;</span><br><span class="line">request.onsuccess = (e) =&gt; &#123;</span><br><span class="line">  db = request.result</span><br><span class="line">&#125;</span><br><span class="line">request.onupgradeneeded = (e) =&gt; &#123;</span><br><span class="line">    const db = e.target.result;</span><br><span class="line">    console.log(db)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="创建存储对象"><a href="#创建存储对象" class="headerlink" title="创建存储对象"></a>创建存储对象</h3><p>注意：需要在<code>onupgradeneeded</code>这个回调方法里设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">request.onupgradeneeded = (e) =&gt; &#123;</span><br><span class="line">    const db = e.target.result;</span><br><span class="line">    const objectStore = db.createObjectStore(&apos;dbName&apos;, &#123; </span><br><span class="line">        autoIncrement: true,</span><br><span class="line">        // keyPath指定主键</span><br><span class="line">        // keyPath: &apos;name&apos;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h3 id="添加数据"><a href="#添加数据" class="headerlink" title="添加数据"></a>添加数据</h3><p>注意：需要先创建事务，然后再打开存储对象进行增删改查<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const objectStore = db.transaction(&apos;dbName&apos;, &quot;readwrite&quot;).objectStore(&apos;dbName&apos;);</span><br><span class="line">objectStore.add(&#123;name: &apos;a&apos;, age: 1&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>由于增删改查都需要用到存储对象，所以我们封装一个获取存储对象的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function getStore() &#123;</span><br><span class="line">    return db.transaction(&apos;dbName&apos;, &quot;readwrite&quot;).objectStore(&apos;dbName&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">getStore().delete(id)</span><br><span class="line">// id是主键的值</span><br></pre></td></tr></table></figure>
+<h3 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h3><h4 id="游标读取"><a href="#游标读取" class="headerlink" title="游标读取"></a>游标读取</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const datas = []</span><br><span class="line">getStore().openCursor().onsuccess = function (event) &#123;</span><br><span class="line">    const cursor = event.target.result;</span><br><span class="line">    if (cursor) &#123;</span><br><span class="line">        datas.push(cursor.value);</span><br><span class="line">        cursor.continue();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        console.log(datas, &apos;datas&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="索引加游标读取"><a href="#索引加游标读取" class="headerlink" title="索引加游标读取"></a>索引加游标读取</h4><p>上面的游标读取方式会遍历数据库中的所有数据直到找到为止，这种方式查找非常慢，可以用索引的方式读取。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var index = getStore().index(&quot;name&quot;);</span><br><span class="line">index.get(&quot;Donna&quot;).onsuccess = function(event) &#123;</span><br><span class="line">  console.log(event.target.result);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="索引加游标读取-1"><a href="#索引加游标读取-1" class="headerlink" title="索引加游标读取"></a>索引加游标读取</h4><p>“name” 游标不是唯一的，因此 name 被设成 “Donna” 的记录可能不止一条。在这种情况下，你总是得到键值最小的那个。</p>
+<p>你可以在索引上打开两个不同类型的游标。一个常规游标映射索引属性到对象存储空间中的对象。一个键索引映射索引属性到用来存储对象存储空间中的对象的键。不同之处被展示如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">index.openCursor().onsuccess = function(event) &#123;</span><br><span class="line">  var cursor = event.target.result;</span><br><span class="line">  if (cursor) &#123;</span><br><span class="line">    // cursor.key 是一个 name, 就像 &quot;Bill&quot;, 然后 cursor.value 是整个对象。</span><br><span class="line">    alert(&quot;Name: &quot; + cursor.key + &quot;, SSN: &quot; + cursor.value.ssn + &quot;, email: &quot; + cursor.value.email);</span><br><span class="line">    cursor.continue();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">index.openKeyCursor().onsuccess = function(event) &#123;</span><br><span class="line">  var cursor = event.target.result;</span><br><span class="line">  if (cursor) &#123;</span><br><span class="line">    // cursor.key 是一个 name, 就像 &quot;Bill&quot;, 然后 cursor.value 是那个 SSN。</span><br><span class="line">    // 没有办法可以得到存储对象的其余部分。</span><br><span class="line">    alert(&quot;Name: &quot; + cursor.key + &quot;, SSN: &quot; + cursor.value);</span><br><span class="line">    cursor.continue();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>给游标加上范围：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 只匹配 &quot;Donna&quot;</span><br><span class="line">var singleKeyRange = IDBKeyRange.only(&quot;Donna&quot;);</span><br><span class="line"></span><br><span class="line">// 匹配所有在 &quot;Bill&quot; 前面的, 包括 &quot;Bill&quot;</span><br><span class="line">var lowerBoundKeyRange = IDBKeyRange.lowerBound(&quot;Bill&quot;);</span><br><span class="line"></span><br><span class="line">// 匹配所有在 “Bill” 前面的, 但是不需要包括 &quot;Bill&quot;</span><br><span class="line">var lowerBoundOpenKeyRange = IDBKeyRange.lowerBound(&quot;Bill&quot;, true);</span><br><span class="line"></span><br><span class="line">// Match anything up to, but not including, &quot;Donna&quot;</span><br><span class="line">var upperBoundOpenKeyRange = IDBKeyRange.upperBound(&quot;Donna&quot;, true);</span><br><span class="line"></span><br><span class="line">//Match anything between &quot;Bill&quot; and &quot;Donna&quot;, but not including &quot;Donna&quot;</span><br><span class="line">var boundKeyRange = IDBKeyRange.bound(&quot;Bill&quot;, &quot;Donna&quot;, false, true);</span><br><span class="line"></span><br><span class="line">index.openCursor(boundKeyRange).onsuccess = function(event) &#123;</span><br><span class="line">  var cursor = event.target.result;</span><br><span class="line">  if (cursor) &#123;</span><br><span class="line">    // Do something with the matches.</span><br><span class="line">    cursor.continue();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="完整例子"><a href="#完整例子" class="headerlink" title="完整例子"></a>完整例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">class indexedDB &#123;</span><br><span class="line">    constructor(&#123; databaseName, dbName, version, fields &#125;) &#123;</span><br><span class="line">        this.db = null;</span><br><span class="line">        this.dbName = dbName;</span><br><span class="line">        this.databaseName = databaseName;</span><br><span class="line">        this.fields = fields;</span><br><span class="line">        this.version = version;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ready(callback) &#123;</span><br><span class="line">        if(this.db) &#123;</span><br><span class="line">            return callback(null, this);</span><br><span class="line">        &#125;</span><br><span class="line">        const dbName = this.dbName;</span><br><span class="line">        const request = window.indexedDB.open(this.databaseName, this.version);</span><br><span class="line">        if(!request)&#123;</span><br><span class="line">            return callback();</span><br><span class="line">        &#125;</span><br><span class="line">        request.onerror = (e) =&gt; &#123;</span><br><span class="line">            callback(e)</span><br><span class="line">            return true;</span><br><span class="line">        &#125;;</span><br><span class="line">        request.onsuccess = (e) =&gt; &#123;</span><br><span class="line">            this.db = request.result;</span><br><span class="line">            callback(null, this)</span><br><span class="line">        &#125;;</span><br><span class="line">        request.onupgradeneeded = (e) =&gt; &#123;</span><br><span class="line">            const db = e.target.result;</span><br><span class="line">            const objectStore = db.createObjectStore(dbName, &#123; autoIncrement: true &#125;);</span><br><span class="line">            this.fields.forEach(field =&gt; &#123;</span><br><span class="line">                objectStore.createIndex(field, field);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    insert(item) &#123;</span><br><span class="line">        this.getStore().add(item)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    delete(id) &#123;</span><br><span class="line">        this.getStore().delete(id)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    getDataByCursor() &#123;</span><br><span class="line">        const datas = []</span><br><span class="line">        this.getStore().openCursor().onsuccess = function (event) &#123;</span><br><span class="line">            const cursor = event.target.result;</span><br><span class="line">            if (cursor) &#123;</span><br><span class="line">                datas.push(cursor.value);</span><br><span class="line">                cursor.continue();</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                console.log(datas, &apos;datas&apos;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    getDataByIndex(i, value) &#123;</span><br><span class="line">        const index = this.getStore().index(i);</span><br><span class="line">        index.get(value).onsuccess = function (event) &#123;</span><br><span class="line">            console.log(event.target.result);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    getDataByIndexAndCursor(i) &#123;</span><br><span class="line">        const index = this.getStore().index(i);</span><br><span class="line">        const request = index.openCursor()</span><br><span class="line">        request.onsuccess = function (e) &#123;</span><br><span class="line">            const cursor = e.target.result;</span><br><span class="line">            if (cursor) &#123;</span><br><span class="line">                console.log(cursor.value);</span><br><span class="line">                cursor.continue();//遍历了存储对象中的所有内容</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                console.log(&apos;查询结束&apos;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    getStore() &#123;</span><br><span class="line">        return this.db.transaction(this.dbName, &quot;readwrite&quot;).objectStore(this.dbName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">export default indexedDB</span><br></pre></td></tr></table></figure>
+<p>例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const indexdb = new indexedDB(&#123; </span><br><span class="line">    databaseName: &apos;test&apos;, </span><br><span class="line">    dbName: &apos;logtest&apos;, </span><br><span class="line">    version: 1, </span><br><span class="line">    fields: [&apos;name&apos;, &apos;age&apos;] </span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">indexedDB.ready((err, db) =&gt; &#123;</span><br><span class="line">    console.log(err, db)</span><br><span class="line">    if(err) return</span><br><span class="line">    indexedDB.insert(&#123;name: &apos;a&apos;, age: 1&#125;)</span><br><span class="line">    indexedDB.insert(&#123;name: &apos;b&apos;, age: 2&#125;)</span><br><span class="line">    db.getDataByCursor()</span><br><span class="line">    db.getDataByIndex(&apos;name&apos;, &apos;b&apos;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API/Using_IndexedDB" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API/Using_IndexedDB</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/24/react-components-extends/" rel="next" title="react组件继承">
+                <i class="fa fa-chevron-left"></i> react组件继承
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="威少" />
+          <p class="site-author-name" itemprop="name">威少</p>
+           
+              <p class="site-description motion-element" itemprop="description">balabala</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据库"><span class="nav-number">1.</span> <span class="nav-text">创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建存储对象"><span class="nav-number">2.</span> <span class="nav-text">创建存储对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加数据"><span class="nav-number">3.</span> <span class="nav-text">添加数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据"><span class="nav-number">4.</span> <span class="nav-text">删除数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取数据"><span class="nav-number">5.</span> <span class="nav-text">读取数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#游标读取"><span class="nav-number">5.1.</span> <span class="nav-text">游标读取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引加游标读取"><span class="nav-number">5.2.</span> <span class="nav-text">索引加游标读取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引加游标读取-1"><span class="nav-number">5.3.</span> <span class="nav-text">索引加游标读取</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完整例子"><span class="nav-number">6.</span> <span class="nav-text">完整例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">7.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">威少</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
