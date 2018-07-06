@@ -263,6 +263,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/06/serviceWorker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="威少">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="威少">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/06/serviceWorker/" itemprop="url">service worker 初体验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-06T13:39:53+08:00">
+                2018-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>service worker是浏览器在后台独立于网页运行的脚本，可以提供离线缓存和消息推送的功能，不能访问DOM和window，可通过<code>self</code>访问全局上下文，通过<code>caches</code>访问<code>cacheStorage</code>。</p>
+<h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><ul>
+<li>浏览器支持</li>
+<li>https(开发过程中可通过localhost使用service worker，上线部署则需要在服务器设置https)</li>
+</ul>
+<h3 id="全局caches"><a href="#全局caches" class="headerlink" title="全局caches"></a>全局caches</h3><p>service worker通过全局的<code>caches</code>访问<code>cacheStorage</code>，主要用到以下api:</p>
+<ul>
+<li><code>caches.open(name)</code>：打开或创建一个名称为name的缓存，返回一个resolve值为该cache的promise。</li>
+<li><code>caches.match(request)</code>：检查给定的request是否是CacheStorage对象跟踪的任何Cache对象中的键，如果存在则返回一个以cache为resolve值的promise。</li>
+<li><code>caches.keys()</code>：返回一个Promise，resolve的值是cache名称的数组。使用此方法迭代所有Cache对象的列表。</li>
+<li><code>caches.delete(name)</code>：删除名称为name的Cache，删除成功返回resolve为ture的promise，否则返回false。</li>
+</ul>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>service worker的使用方式基本可以概括为：</p>
+<ol>
+<li>在html中注册service worker脚本。</li>
+<li>在sw.js文件中(假设第一步注册的service worker脚本文件名为sw.js)监听相应的生命周期事件来实现缓存管理。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">this.addEventListener(&apos;install&apos;, function(event) &#123; /* 在该事件里设置缓存文件 */ &#125;);</span><br><span class="line">this.addEventListener(&apos;fetch&apos;, function(event) &#123; /* 在该事件里劫持响应，可以选择返回缓存文件或进行网络请求 */ &#125;);</span><br><span class="line">this.addEventListener(&apos;activate&apos;, function(event) &#123; /* 在该事件里删除旧版缓存 */ &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/06/serviceWorker/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/09/imagedata/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1322,7 +1463,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
