@@ -343,14 +343,7 @@
 <li><code>caches.open(name)</code>：打开或创建一个名称为name的缓存，返回一个resolve值为该cache的promise。</li>
 <li><code>caches.match(request)</code>：检查给定的request是否是CacheStorage对象跟踪的任何Cache对象中的键，如果存在则返回一个以cache为resolve值的promise。</li>
 <li><code>caches.keys()</code>：返回一个Promise，resolve的值是cache名称的数组。使用此方法迭代所有Cache对象的列表。</li>
-<li><code>caches.delete(name)</code>：删除名称为name的Cache，删除成功返回resolve为ture的promise，否则返回false。</li>
-</ul>
-<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>service worker的使用方式基本可以概括为：</p>
-<ol>
-<li>在html中注册service worker脚本。</li>
-<li>在sw.js文件中(假设第一步注册的service worker脚本文件名为sw.js)监听相应的生命周期事件来实现缓存管理。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">this.addEventListener(&apos;install&apos;, function(event) &#123; /* 在该事件里设置缓存文件 */ &#125;);</span><br><span class="line">this.addEventListener(&apos;fetch&apos;, function(event) &#123; /* 在该事件里劫持响应，可以选择返回缓存文件或进行网络请求 */ &#125;);</span><br><span class="line">this.addEventListener(&apos;activate&apos;, function(event) &#123; /* 在该事件里删除旧版缓存 */ &#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+<li><code>caches.delete(name)</code>：删除名称为name的Cache，删除成功返回resolve为ture的promise，否则返回false。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/06/serviceWorker/#more" rel="contents">
