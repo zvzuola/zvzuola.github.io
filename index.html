@@ -343,7 +343,8 @@
 <li><code>caches.open(name)</code>：打开或创建一个名称为name的缓存，返回一个resolve值为该cache的promise。</li>
 <li><code>caches.match(request)</code>：检查给定的request是否是CacheStorage对象跟踪的任何Cache对象中的键，如果存在则返回一个以cache为resolve值的promise。</li>
 <li><code>caches.keys()</code>：返回一个Promise，resolve的值是cache名称的数组。使用此方法迭代所有Cache对象的列表。</li>
-<li><code>caches.delete(name)</code>：删除名称为name的Cache，删除成功返回resolve为ture的promise，否则返回false。
+<li><code>caches.delete(name)</code>：删除名称为name的Cache，删除成功返回resolve为ture的promise，否则返回false。</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/06/serviceWorker/#more" rel="contents">
