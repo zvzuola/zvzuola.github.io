@@ -333,7 +333,10 @@
 
       
         
-          <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>service worker是浏览器在后台独立于网页运行的脚本，可以提供离线缓存和消息推送的功能，不能访问DOM和window，可通过<code>self</code>访问全局上下文，通过<code>caches</code>访问<code>cacheStorage</code>。</p>
+          <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>service worker是浏览器在后台独立于网页运行的脚本，所以不能访问DOM和window，可以提供离线缓存的功能并可以通过<code>postMessage</code>接口与页面通信，本文主要来说说如何简单实现离线缓存的功能。</p>
+<p>离线缓存最常用的场景就是在离线情况下依然可以访问应用，从而创建良好的离线体验。</p>
+<p>首先上一张我们将要实现的效果图<br> <img src="http://nos.netease.com/dealer/dealer_webapp/static/img/static-582e317a4c.gif" alt="Alt pic"> </p>
+<p>从上图可以看到页面第一次进来时是通过网络请求加载页面，此时service worker便会帮我们缓存我们指定的页面(代码中需要指定我们需要缓存的资源)，然后我们通过控制台设置页面为离线状态，此时可以看到服务依然可以访问，而资源的加载是通过service worker。</p>
 <h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><ul>
 <li>浏览器支持</li>
 <li>https(开发过程中可通过localhost使用service worker，上线部署则需要在服务器设置https)</li>
