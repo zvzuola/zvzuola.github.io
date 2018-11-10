@@ -94,17 +94,16 @@
 
 
 
-<meta name="description" content="iphonex底部固定菜单适配第一步：设置meta，viewport-fit=cover1&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, viewport-fit=cover&amp;quot;&amp;gt;">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iphonex">
-<meta property="og:url" content="http://yoursite.com/2018/03/22/iphonex/index.html">
+<meta name="description" content="balabala">
+<meta property="og:type" content="website">
+<meta property="og:title" content="威少">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="威少">
-<meta property="og:description" content="iphonex底部固定菜单适配第一步：设置meta，viewport-fit=cover1&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, viewport-fit=cover&amp;quot;&amp;gt;">
+<meta property="og:description" content="balabala">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-22T09:02:40.773Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iphonex">
-<meta name="twitter:description" content="iphonex底部固定菜单适配第一步：设置meta，viewport-fit=cover1&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, viewport-fit=cover&amp;quot;&amp;gt;">
+<meta name="twitter:title" content="威少">
+<meta name="twitter:description" content="balabala">
 
 
 
@@ -133,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/22/iphonex/"/>
+  <link rel="canonical" href="http://yoursite.com/page/2/"/>
 
 
 
 
 
-  <title>iphonex | 威少</title>
+  <title>威少</title>
   
 
 
@@ -164,7 +163,9 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,9 +248,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -279,7 +280,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iphonex</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/22/iphonex/" itemprop="url">iphonex</a></h1>
         
 
         <div class="post-meta">
@@ -340,16 +343,16 @@
       
 
       
-        <h3 id="iphonex底部固定菜单适配"><a href="#iphonex底部固定菜单适配" class="headerlink" title="iphonex底部固定菜单适配"></a>iphonex底部固定菜单适配</h3><h4 id="第一步：设置meta，viewport-fit-cover"><a href="#第一步：设置meta，viewport-fit-cover" class="headerlink" title="第一步：设置meta，viewport-fit=cover"></a>第一步：设置meta，viewport-fit=cover</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, viewport-fit=cover&quot;&gt;</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h4 id="第二步：设置padding值为安全区域距离底部边界的距离"><a href="#第二步：设置padding值为安全区域距离底部边界的距离" class="headerlink" title="第二步：设置padding值为安全区域距离底部边界的距离"></a>第二步：设置padding值为安全区域距离底部边界的距离</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">padding &#123;</span><br><span class="line">  padding-bottom: constant(safe-area-inset-bottom);</span><br><span class="line">  padding-bottom: env(safe-area-inset-bottom);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="出现的问题"><a href="#出现的问题" class="headerlink" title="出现的问题"></a>出现的问题</h4><ol>
-<li><p>iphonex设置viewport-fix=cover后，position:fixed;bottom:0没有贴到底部</p>
-<h5 id="解决方案：html-height-100vh"><a href="#解决方案：html-height-100vh" class="headerlink" title="解决方案：html{height:  100vh}"></a>解决方案：html{height:  100vh}</h5></li>
-<li><p>iphonex用rem布局，viewport设置了scale:0.3333后，设置padding-bottom:  env(safe-area-inset-bottom)，表现padding-bottom被缩放了</p>
-<h5 id="解决方案：padding-bottom-calc-3-env-safe-area-inset-bottom"><a href="#解决方案：padding-bottom-calc-3-env-safe-area-inset-bottom" class="headerlink" title="解决方案：padding-bottom:calc(3*env(safe-area-inset-bottom));"></a>解决方案：padding-bottom:calc(3*env(safe-area-inset-bottom));</h5></li>
-</ol>
-
+        
+          <h3 id="iphonex底部固定菜单适配"><a href="#iphonex底部固定菜单适配" class="headerlink" title="iphonex底部固定菜单适配"></a>iphonex底部固定菜单适配</h3><h4 id="第一步：设置meta，viewport-fit-cover"><a href="#第一步：设置meta，viewport-fit-cover" class="headerlink" title="第一步：设置meta，viewport-fit=cover"></a>第一步：设置meta，viewport-fit=cover</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, viewport-fit=cover&quot;&gt;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/22/iphonex/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
     
@@ -359,30 +362,6 @@
     
 
     
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div></div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechatpay.jpeg" alt="威少 WeChat Pay"/>
-        <p>微信支付</p>
-      </div>
-    
-
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
-    
 
     
 
@@ -390,32 +369,12 @@
       
 
       
-      
+
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/03/22/typescript-react-webpack-alias/" rel="next" title="React配置Typescript遇到的一些问题">
-                <i class="fa fa-chevron-left"></i> React配置Typescript遇到的一些问题
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/30/ReactCSSTransitionGroup/" rel="prev" title="ReactCSSTransitionGroup">
-                ReactCSSTransitionGroup <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -425,11 +384,152 @@
   </article>
 
 
+    
+      
 
-    <div class="post-spread">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/typescript-react-webpack-alias/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="威少">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="威少">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/22/typescript-react-webpack-alias/" itemprop="url">React配置Typescript遇到的一些问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T16:24:18+08:00">
+                2018-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/22/typescript-react-webpack-alias/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/03/22/typescript-react-webpack-alias/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="webpack配置的alias在ts编译时不生效"><a href="#webpack配置的alias在ts编译时不生效" class="headerlink" title="webpack配置的alias在ts编译时不生效"></a>webpack配置的alias在ts编译时不生效</h3><p>解决办法：tsconfig.json里配置baseUrl(必须要)和paths。</p>
+<p>==注意utils后面要加“/*”==</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;compilerOptions&quot;: &#123;</span><br><span class="line">        &quot;baseUrl&quot;: &quot;./&quot;,</span><br><span class="line">        &quot;paths&quot;: &#123;</span><br><span class="line">            &quot;utils/*&quot;: [&quot;src/utils/*&quot;],</span><br><span class="line">            &quot;configs/*&quot;: [&quot;src/config/*&quot;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="tsx里面import-js-文件会报找不到声明文件之类的错误"><a href="#tsx里面import-js-文件会报找不到声明文件之类的错误" class="headerlink" title="tsx里面import js 文件会报找不到声明文件之类的错误"></a>tsx里面import js 文件会报找不到声明文件之类的错误</h3><p>解决办法：tsconfig.json里配置allowJs: true<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;compilerOptions&quot;: &#123;</span><br><span class="line">        &quot;allowJs&quot;: true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/22/typescript-react-webpack-alias/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
 
 
           </div>
@@ -437,17 +537,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -468,17 +557,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -522,22 +602,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#iphonex底部固定菜单适配"><span class="nav-number">1.</span> <span class="nav-text">iphonex底部固定菜单适配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一步：设置meta，viewport-fit-cover"><span class="nav-number">1.1.</span> <span class="nav-text">第一步：设置meta，viewport-fit=cover</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二步：设置padding值为安全区域距离底部边界的距离"><span class="nav-number">1.2.</span> <span class="nav-text">第二步：设置padding值为安全区域距离底部边界的距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#出现的问题"><span class="nav-number">1.3.</span> <span class="nav-text">出现的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案：html-height-100vh"><span class="nav-number">1.3.1.</span> <span class="nav-text">解决方案：html{height:  100vh}</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案：padding-bottom-calc-3-env-safe-area-inset-bottom"><span class="nav-number">1.3.2.</span> <span class="nav-text">解决方案：padding-bottom:calc(3*env(safe-area-inset-bottom));</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -640,10 +704,10 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-
+  
 
   
 
@@ -661,18 +725,6 @@
       <script id="dsq-count-scr" src="https://weishao.disqus.com/count.js" async></script>
     
 
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/03/22/iphonex/';
-          this.page.identifier = '2018/03/22/iphonex/';
-          this.page.title = 'iphonex';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://weishao.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
     
 
   
