@@ -263,6 +263,289 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/19/scrollTop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="威少">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="威少">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/19/scrollTop/" itemprop="url">获取和设置滚动高度的几种方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-19T11:29:47+08:00">
+                2018-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/19/scrollTop/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/19/scrollTop/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="获取和设置滚动高度的几种方法"><a href="#获取和设置滚动高度的几种方法" class="headerlink" title="获取和设置滚动高度的几种方法"></a>获取和设置滚动高度的几种方法</h3><h4 id="获取浏览器的渲染模式"><a href="#获取浏览器的渲染模式" class="headerlink" title="获取浏览器的渲染模式"></a>获取浏览器的渲染模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">document.compatMode</span><br><span class="line">标准模式: &apos;CSS1Compat&apos;</span><br><span class="line">怪异模式: &apos;BackCompat&apos;</span><br></pre></td></tr></table></figure>
+<h4 id="获取window的scrollTop"><a href="#获取window的scrollTop" class="headerlink" title="获取window的scrollTop"></a>获取window的scrollTop</h4><ul>
+<li>在标准模式下用document.documentElement.scrollTop </li>
+<li>在怪异模式下用document.body.scrollTop </li>
+<li>window.scrollY 移动端兼容性不大好</li>
+<li><p>window.pageYOffset, scrollY 的别名，根据MDN的文档，为了浏览器兼容，建议使用window.pageYOffset代替window.scrollY</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">window.pageYOffset === window.scrollY</span><br><span class="line">返回true</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>兼容性写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/19/scrollTop/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/30/ReactCSSTransitionGroup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="威少">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="威少">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/30/ReactCSSTransitionGroup/" itemprop="url">ReactCSSTransitionGroup</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T14:26:21+08:00">
+                2018-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/30/ReactCSSTransitionGroup/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/03/30/ReactCSSTransitionGroup/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="ReactCSSTransitionGroup使用"><a href="#ReactCSSTransitionGroup使用" class="headerlink" title="ReactCSSTransitionGroup使用"></a>ReactCSSTransitionGroup使用</h3><p>详情看官网文档<a href="https://reactjs.org/docs/animation.html" target="_blank" rel="noopener">https://reactjs.org/docs/animation.html</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import ReactCSSTransitionGroup from &apos;react-addons-css-transition-group&apos;;</span><br><span class="line">class TodoList extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.state = &#123;items: [&apos;hello&apos;, &apos;world&apos;, &apos;click&apos;, &apos;me&apos;]&#125;;</span><br><span class="line">    this.handleAdd = this.handleAdd.bind(this);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleAdd() &#123;</span><br><span class="line">    const newItems = this.state.items.concat([</span><br><span class="line">      prompt(&apos;Enter some text&apos;)</span><br><span class="line">    ]);</span><br><span class="line">    this.setState(&#123;items: newItems&#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleRemove(i) &#123;</span><br><span class="line">    let newItems = this.state.items.slice();</span><br><span class="line">    newItems.splice(i, 1);</span><br><span class="line">    this.setState(&#123;items: newItems&#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    const items = this.state.items.map((item, i) =&gt; (</span><br><span class="line">      &lt;div key=&#123;item&#125; onClick=&#123;() =&gt; this.handleRemove(i)&#125;&gt;</span><br><span class="line">        &#123;item&#125;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    ));</span><br><span class="line"></span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;button onClick=&#123;this.handleAdd&#125;&gt;Add Item&lt;/button&gt;</span><br><span class="line">        &lt;ReactCSSTransitionGroup</span><br><span class="line">          transitionName=&quot;example&quot;</span><br><span class="line">          transitionEnterTimeout=&#123;500&#125;</span><br><span class="line">          transitionLeaveTimeout=&#123;300&#125;&gt;</span><br><span class="line"></span><br><span class="line">          &#123;items&#125;</span><br><span class="line">        &lt;/ReactCSSTransitionGroup&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>You’ll notice that animation durations need to be specified in both the CSS and the render method; this tells React when to remove the animation classes from the element and — if it’s leaving — when to remove the element from the DOM.</p>
+<p>在css和render方法里都必须指定动画时长，这是为了告诉react什么时候去移除动画class，或者什么时候去移除dom节点（如果是离开状态）<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/30/ReactCSSTransitionGroup/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/iphonex/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -573,7 +856,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -619,7 +902,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

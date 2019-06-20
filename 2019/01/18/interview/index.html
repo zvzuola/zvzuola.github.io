@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Reactreact-routerreduxredux的基本流程就是新建一个store，内部维护一个currentState对象用来保存状态树，通过dispatch一个action来修改状态，通过subscribe注册监听事件，并在执行dispatch的时候触发之前注册的监听事件，从而实现数据响应。 Time Slice 和Suspense时间分片 window.requestIdleCallba">
+<meta property="og:type" content="article">
+<meta property="og:title" content="interview">
+<meta property="og:url" content="http://yoursite.com/2019/01/18/interview/index.html">
+<meta property="og:site_name" content="威少">
+<meta property="og:description" content="Reactreact-routerreduxredux的基本流程就是新建一个store，内部维护一个currentState对象用来保存状态树，通过dispatch一个action来修改状态，通过subscribe注册监听事件，并在执行dispatch的时候触发之前注册的监听事件，从而实现数据响应。 Time Slice 和Suspense时间分片 window.requestIdleCallba">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-20T10:20:08.396Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="interview">
+<meta name="twitter:description" content="Reactreact-routerreduxredux的基本流程就是新建一个store，内部维护一个currentState对象用来保存状态树，通过dispatch一个action来修改状态，通过subscribe注册监听事件，并在执行dispatch的时候触发之前注册的监听事件，从而实现数据响应。 Time Slice 和Suspense时间分片 window.requestIdleCallba">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/18/interview/"/>
+
+
+
+
+
+  <title>interview | 威少</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">威少</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">前端开发工程师</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/18/interview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="威少">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="威少">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">interview</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T16:17:11+08:00">
+                2019-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/18/interview/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/18/interview/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><h4 id="react-router"><a href="#react-router" class="headerlink" title="react-router"></a>react-router</h4><h4 id="redux"><a href="#redux" class="headerlink" title="redux"></a>redux</h4><p>redux的基本流程就是新建一个store，内部维护一个currentState对象用来保存状态树，通过dispatch一个action来修改状态，通过subscribe注册监听事件，并在执行dispatch的时候触发之前注册的监听事件，从而实现数据响应。</p>
+<h4 id="Time-Slice-和Suspense"><a href="#Time-Slice-和Suspense" class="headerlink" title="Time Slice 和Suspense"></a>Time Slice 和Suspense</h4><h5 id="时间分片-window-requestIdleCallback"><a href="#时间分片-window-requestIdleCallback" class="headerlink" title="时间分片 window.requestIdleCallback"></a>时间分片 window.requestIdleCallback</h5><ul>
+<li>React 在渲染（render）的时候，不会阻塞现在的线程</li>
+</ul>
+<h5 id="Suspense"><a href="#Suspense" class="headerlink" title="Suspense"></a>Suspense</h5><p>Suspense主要解决的就是网络IO问题,<br>调用render函数-&gt;发现有异步请求-&gt;悬停，等待异步请求结果-&gt;再渲染展示数据</p>
+<h4 id="setState同步和异步"><a href="#setState同步和异步" class="headerlink" title="setState同步和异步"></a>setState同步和异步</h4><p>在一个react事件周期里setState是异步的，比如(生命周期函数)<br>在其他的事件周期里是同步的，比如(ajax回调，setTimeout)。<br><a id="more"></a></p>
+<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><h4 id="双向绑定原理"><a href="#双向绑定原理" class="headerlink" title="双向绑定原理"></a>双向绑定原理</h4><p>对象劫持，通过Object.defineProperty中的getter和setter方法。每个属性都注册一个Dep实例，实现观察者-订阅者模式。</p>
+<h2 id="Css"><a href="#Css" class="headerlink" title="Css"></a>Css</h2><h4 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h4><p>css的盒模型由content(内容)、padding(内边距)、border(边框)、margin(外边距)组成。可通过<code>box-sizing</code>改变盒模型。</p>
+<ol>
+<li>W3C 标准盒模型：<br>属性width,height只包含内容content，不包含border和padding。</li>
+<li>IE 盒模型：<br>属性width,height包含border和padding，指的是content+padding+border。</li>
+</ol>
+<h4 id="link-vs-import"><a href="#link-vs-import" class="headerlink" title="link vs @import"></a>link vs @import</h4><ul>
+<li>@import url（）机制是不同于link的，link是在加载页面前把css加载完毕，而@import url（）则是读取完文件后在加载，所以会出现一开始没有css样式，闪烁一下出现样式后的页面(网速慢的情况下)。</li>
+<li>@import 是css2里面的，所以古老的ie5不支持。</li>
+<li>当使用javascript控制dom去改变样式的时候，只能使用link标签，因为@import不是dom可以控制的。</li>
+<li>link除了能加载css外还能定义RSS，定义rel连接属性，@import只能加载css。</li>
+<li>@import url(xxx.css);有最大次数的限制，经测试IE6的最大次数是31次，第32个import及以后的都不能生效。</li>
+</ul>
+<h4 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h4><p>块格式化上下文是布局过程中生成块级盒子的区域.</p>
+<p>块格式化上下文对浮动定位（参见 float）与清除浮动（参见 clear）都很重要。浮动定位和清除浮动时只会应用于同一个BFC内的元素。浮动不会影响其它BFC中元素的布局，而清除浮动只能清除同一BFC中在它前面的元素的浮动。外边距折叠（Margin collapsing）也只会发生在属于同一BFC的块级元素之间。</p>
+<h2 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript</h2><h4 id="let"><a href="#let" class="headerlink" title="let"></a>let</h4><p>块级作用域，不存在变量提升</p>
+<p>暂时性死区：ES6明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。不允许重复声明。</p>
+<h4 id="async-await-promise"><a href="#async-await-promise" class="headerlink" title="async await promise"></a>async await promise</h4><p>generator函数的语法糖，返回promise。</p>
+<h4 id="Map-vs-Object"><a href="#Map-vs-Object" class="headerlink" title="Map vs Object"></a>Map vs Object</h4><p>ES6 提供了 Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。也就是说，Object 结构提供了“字符串—值”的对应，Map 结构提供了“值—值”的对应，是一种更完善的 Hash 结构实现。如果你需要“键值对”的数据结构，Map 比 Object 更合适。</p>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><h5 id="原型继承"><a href="#原型继承" class="headerlink" title="原型继承"></a>原型继承</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function Parent()&#123;</span><br><span class="line">   this.x = 199;</span><br><span class="line">   this.y = 299;</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.say = function()&#123;</span><br><span class="line">   console.log(&apos;say&apos;)</span><br><span class="line">&#125;</span><br><span class="line">function Child()&#123;</span><br><span class="line">   this.g = 90;</span><br><span class="line">&#125;</span><br><span class="line">Child.prototype = new Parent();</span><br><span class="line">Child.prototype.constructor = Child;</span><br><span class="line">var p = new Parent();</span><br><span class="line">var c = new Child();</span><br><span class="line">console.dir(c)</span><br></pre></td></tr></table></figure>
+<p>简单易懂，但是无法实现多继承，父类新增原型方法/原型属性，子类都能访问到</p>
+<h5 id="call-继承"><a href="#call-继承" class="headerlink" title="call 继承"></a>call 继承</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function Parent() &#123;</span><br><span class="line">	this.x = 100;</span><br><span class="line">	this.y = 199;</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.fn = function() &#123;&#125;</span><br><span class="line"> </span><br><span class="line">function Child() &#123;</span><br><span class="line">	this.d = 100;</span><br><span class="line">	Parent.call(this); //构造函数中的this就是当前实例</span><br><span class="line">&#125;</span><br><span class="line">var p = new Parent();</span><br><span class="line">var c = new Child();</span><br><span class="line">console.log(p)  //Parent &#123;x: 100, y: 199&#125;</span><br><span class="line">console.log(c)  //Child &#123;d: 100, x: 100, y: 199&#125;</span><br></pre></td></tr></table></figure>
+<p>可以实现多继承，但是只能继承父类的实例属性和方法，不能继承原型属性/方法</p>
+<h5 id="混合继承"><a href="#混合继承" class="headerlink" title="混合继承"></a>混合继承</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Parent()&#123;</span><br><span class="line">	this.x=100;</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.getX = function()&#123;&#125;</span><br><span class="line">function Child()&#123;</span><br><span class="line">	Parent.call(this);</span><br><span class="line">&#125;</span><br><span class="line">Child.prototype =  new Parent();</span><br><span class="line">Child.prototype.constructor = Child;</span><br><span class="line">var p = new Parent();</span><br><span class="line">var c = new Child();</span><br><span class="line">console.log(c)//Child &#123;x: 100&#125;</span><br></pre></td></tr></table></figure>
+<p>可以继承实例属性/方法，也可以继承原型属性/方法，但是执行了两遍构造函数</p>
+<h5 id="寄生组合式继承"><a href="#寄生组合式继承" class="headerlink" title="寄生组合式继承"></a>寄生组合式继承</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Parent()&#123;</span><br><span class="line">	this.x=100;</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.getX = function()&#123;&#125;</span><br><span class="line">function Child()&#123;</span><br><span class="line">	Parent.call(this);</span><br><span class="line">&#125;</span><br><span class="line">Child.prototype = Object.create(Parent.prototype);</span><br><span class="line">Child.prototype.constructor = Child;</span><br><span class="line">var p = new Parent();</span><br><span class="line">var c = new Child();</span><br><span class="line">console.log(c)//Child &#123;x: 100&#125;</span><br></pre></td></tr></table></figure>
+<p>只调用了一次SuperType 构造函数，并且因此避免了在SubType.prototype上面创建不必要的、多余的属性</p>
+<h5 id="new运算符做了什么"><a href="#new运算符做了什么" class="headerlink" title="new运算符做了什么"></a>new运算符做了什么</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = new A();</span><br><span class="line">// 1. 首先创建一个空对象</span><br><span class="line">var a = new Object();</span><br><span class="line">// 2. 将空对象的原型赋值为构造器函数的原型</span><br><span class="line">a.__proto__ = A.prototype;</span><br><span class="line">// 3. 更改构造器函数内部this，将其指向新创建的空对象</span><br><span class="line">A.call(a);</span><br></pre></td></tr></table></figure>
+<h2 id="跨域请求"><a href="#跨域请求" class="headerlink" title="跨域请求"></a>跨域请求</h2><h4 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h4><p>跨域资源共享(cross-origin-resource-sharing)</p>
+<h4 id="表单请求"><a href="#表单请求" class="headerlink" title="表单请求"></a>表单请求</h4><p>表单请求没有跨域限制，因为原页面用 form 提交到另一个域名之后，原页面的脚本无法获取新页面中的内容。所以浏览器认为这是安全的。而 AJAX 是可以读取响应内容的，因此浏览器不能允许你这样做。</p>
+<h4 id="Ajax请求"><a href="#Ajax请求" class="headerlink" title="Ajax请求"></a>Ajax请求</h4><ul>
+<li>Nginx代理</li>
+<li>服务端设置Access-Control-Allow-Origin</li>
+<li>jsonp</li>
+</ul>
+<h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2><h4 id="webpack使用过的plugin和loader"><a href="#webpack使用过的plugin和loader" class="headerlink" title="webpack使用过的plugin和loader"></a>webpack使用过的plugin和loader</h4><p>loader:</p>
+<ul>
+<li>css-loader, style-loader</li>
+<li>url-loader, file-loader</li>
+<li>babel-loader</li>
+<li>plugin:</li>
+<li>HtmlWebpackPlugin 自动生成html</li>
+<li>ExtractTextPlugin 抽离单独文件</li>
+<li>BundleAnalyzerPlugin 打包大小分析</li>
+<li>UglifyJSPlugin(webpack4之后不需要了)</li>
+</ul>
+<h4 id="plugin实现原理"><a href="#plugin实现原理" class="headerlink" title="plugin实现原理"></a>plugin实现原理</h4><h4 id="webpack打包性能优化点"><a href="#webpack打包性能优化点" class="headerlink" title="webpack打包性能优化点"></a>webpack打包性能优化点</h4><ul>
+<li>减小打包文件体积</li>
+<li>代码压缩</li>
+<li>代码分割</li>
+<li>chunk</li>
+</ul>
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><h4 id="http2和http1区别"><a href="#http2和http1区别" class="headerlink" title="http2和http1区别"></a>http2和http1区别</h4><ul>
+<li><p>新的二进制格式（Binary Format），HTTP1.x的解析是基于文本。基于文本协议的格式解析存在天然缺陷，文本的表现形式有多样性，要做到健壮性考虑的场景必然很多，二进制则不同，只认0和1的组合。基于这种考虑HTTP2.0的协议解析决定采用二进制格式，实现方便且健壮。</p>
+</li>
+<li><p>多路复用（MultiPlexing），即连接共享，即每一个request都是是用作连接共享机制的。一个request对应一个id，这样一个连接上可以有多个request，每个连接的request可以随机的混杂在一起，接收方可以根据request的 id将request再归属到各自不同的服务端请求里面。(<strong>HTTP/1 一次请求-响应，建立一个连接，用完关闭；每一个请求都要建立一个连接</strong>)</p>
+</li>
+<li><p>header压缩，如上文中所言，对前面提到过HTTP1.x的header带有大量信息，而且每次都要重复发送，HTTP2.0使用encoder来减少需要传输的header大小，通讯双方各自cache一份header fields表，既避免了重复header的传输，又减小了需要传输的大小。</p>
+</li>
+<li><p>服务端推送（server push），同SPDY一样，HTTP2.0也具有server push功能。简单来讲就是当用户的浏览器和服务器在建立链接后，服务器主动将一些资源推送给浏览器并缓存起来，这样当浏览器接下来请求这些资源时就直接从缓存中读取，不会在从服务器上拉了，提升了速率。举一个例子就是：假如一个页面有3个资源文件index.html,index.css,index.js,当浏览器请求index.html的时候，服务器不仅返回index.html的内容，同时将index.css和index.js的内容push给浏览器，当浏览器下次请求这2两个文件时就可以直接从缓存中读取了。</p>
+</li>
+</ul>
+<h2 id="Koa"><a href="#Koa" class="headerlink" title="Koa"></a>Koa</h2><h4 id="koa-route原理"><a href="#koa-route原理" class="headerlink" title="koa-route原理"></a>koa-route原理</h4><ul>
+<li>koa 的中间件 ，运用洋葱路由模型 添加的koa-router。koa-router内部通过判断 url是否匹配，来对相应接口返回相应内容</li>
+</ul>
+<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><p>选择”基准”（pivot），并将其与原数组分离，再定义两个空数组，用来存放一左一右的两个子集。然后，开始遍历数组，小于”基准”的元素放入左边的子集，大于基准的元素放入右边的子集。最后，使用递归不断重复这个过程，就可以得到排序后的数组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var quickSort = function(arr) &#123;</span><br><span class="line">　　if (arr.length &lt;= 1) &#123; return arr; &#125;</span><br><span class="line">　　var pivotIndex = Math.floor(arr.length / 2);</span><br><span class="line">　　var pivot = arr.splice(pivotIndex, 1)[0];</span><br><span class="line">　　var left = [];</span><br><span class="line">　　var right = [];</span><br><span class="line">　　for (var i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">　　　　if (arr[i] &lt; pivot) &#123;</span><br><span class="line">　　　　　　left.push(arr[i]);</span><br><span class="line">　　　　&#125; else &#123;</span><br><span class="line">　　　　　　right.push(arr[i]);</span><br><span class="line">　　　　&#125;</span><br><span class="line">　　&#125;</span><br><span class="line">　　return quickSort(left).concat([pivot], quickSort(right));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><p>依次比较相邻的两个元素，如果后一个小于前一个，则交换，这样从头到尾一次，就将最大的放到了末尾。从头到尾再来一次，由于每进行一轮，最后的都已经是最大的了，因此后一轮需要比较次数可以比上一次少一个。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function bubbleSort(arr) &#123;   </span><br><span class="line">    var len = arr.length;   </span><br><span class="line">    for (var i = 0; i &lt; len - 1; i++) &#123;   </span><br><span class="line">        for (var j = 0; j &lt; len - 1 - i; j++) &#123;   </span><br><span class="line">            if (arr[j] &gt; arr[j+1]) &#123;        // 相邻元素两两对比   </span><br><span class="line">                var temp = arr[j+1];        // 元素交换   </span><br><span class="line">                arr[j+1] = arr[j];   </span><br><span class="line">                arr[j] = temp;   </span><br><span class="line">            &#125;   </span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;   </span><br><span class="line">    return arr;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>每次都找一个最大或者最小的排在开始即可。首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。重复第二步，直到所有元素均排序完毕<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function selectionSort(arr) &#123;   </span><br><span class="line">    var len = arr.length;   </span><br><span class="line">    var minIndex, temp;   </span><br><span class="line">    for (var i = 0; i &lt; len - 1; i++) &#123;   </span><br><span class="line">        minIndex = i;   </span><br><span class="line">        for (var j = i + 1; j &lt; len; j++) &#123;   </span><br><span class="line">            if (arr[j] &lt; arr[minIndex]) &#123;     // 寻找最小的数   </span><br><span class="line">                minIndex = j;                 // 将最小数的索引保存   </span><br><span class="line">            &#125;   </span><br><span class="line">        &#125;   </span><br><span class="line">        temp = arr[i];   </span><br><span class="line">        arr[i] = arr[minIndex];   </span><br><span class="line">        arr[minIndex] = temp;   </span><br><span class="line">    &#125;   </span><br><span class="line">    return arr;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="安全问题"><a href="#安全问题" class="headerlink" title="安全问题"></a>安全问题</h2><h4 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h4><p>跨站脚本攻击，是一种网站应用程序的安全漏洞攻击，是代码注入的一种。常见方式是将恶意代码注入合法代码里隐藏起来，再诱发恶意代码，从而进行各种各样的非法活动。</p>
+<p>防范：记住一点“所有用户输入都是不可信的”，所以得做输入过滤和转义。</p>
+<h4 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h4><p>跨站请求伪造，也称XSRF，是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。与XSS相比，XSS利用的是用户对指定网站的信任，CSRF利用的是网站对用户网页浏览器的信任。</p>
+<p>防范：用户操作验证（验证码），额外验证机制（token使用）等</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpeg" alt="威少 WeChat Pay"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/08/vuex/" rel="next" title="根据实例解析vuex源码">
+                <i class="fa fa-chevron-left"></i> 根据实例解析vuex源码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/20/https/" rel="prev" title="https">
+                https <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="威少" />
+          <p class="site-author-name" itemprop="name">威少</p>
+           
+              <p class="site-description motion-element" itemprop="description">balabala</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React"><span class="nav-number">1.</span> <span class="nav-text">React</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#react-router"><span class="nav-number">1.0.1.</span> <span class="nav-text">react-router</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redux"><span class="nav-number">1.0.2.</span> <span class="nav-text">redux</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Time-Slice-和Suspense"><span class="nav-number">1.0.3.</span> <span class="nav-text">Time Slice 和Suspense</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#时间分片-window-requestIdleCallback"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">时间分片 window.requestIdleCallback</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Suspense"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">Suspense</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setState同步和异步"><span class="nav-number">1.0.4.</span> <span class="nav-text">setState同步和异步</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue"><span class="nav-number">2.</span> <span class="nav-text">Vue</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#双向绑定原理"><span class="nav-number">2.0.1.</span> <span class="nav-text">双向绑定原理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Css"><span class="nav-number">3.</span> <span class="nav-text">Css</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#盒模型"><span class="nav-number">3.0.1.</span> <span class="nav-text">盒模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#link-vs-import"><span class="nav-number">3.0.2.</span> <span class="nav-text">link vs @import</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BFC"><span class="nav-number">3.0.3.</span> <span class="nav-text">BFC</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Javascript"><span class="nav-number">4.</span> <span class="nav-text">Javascript</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#let"><span class="nav-number">4.0.1.</span> <span class="nav-text">let</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#async-await-promise"><span class="nav-number">4.0.2.</span> <span class="nav-text">async await promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Map-vs-Object"><span class="nav-number">4.0.3.</span> <span class="nav-text">Map vs Object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继承"><span class="nav-number">4.0.4.</span> <span class="nav-text">继承</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原型继承"><span class="nav-number">4.0.4.1.</span> <span class="nav-text">原型继承</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#call-继承"><span class="nav-number">4.0.4.2.</span> <span class="nav-text">call 继承</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#混合继承"><span class="nav-number">4.0.4.3.</span> <span class="nav-text">混合继承</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#寄生组合式继承"><span class="nav-number">4.0.4.4.</span> <span class="nav-text">寄生组合式继承</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#new运算符做了什么"><span class="nav-number">4.0.4.5.</span> <span class="nav-text">new运算符做了什么</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域请求"><span class="nav-number">5.</span> <span class="nav-text">跨域请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CORS"><span class="nav-number">5.0.1.</span> <span class="nav-text">CORS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表单请求"><span class="nav-number">5.0.2.</span> <span class="nav-text">表单请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax请求"><span class="nav-number">5.0.3.</span> <span class="nav-text">Ajax请求</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack"><span class="nav-number">6.</span> <span class="nav-text">webpack</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#webpack使用过的plugin和loader"><span class="nav-number">6.0.1.</span> <span class="nav-text">webpack使用过的plugin和loader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#plugin实现原理"><span class="nav-number">6.0.2.</span> <span class="nav-text">plugin实现原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#webpack打包性能优化点"><span class="nav-number">6.0.3.</span> <span class="nav-text">webpack打包性能优化点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP"><span class="nav-number">7.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http2和http1区别"><span class="nav-number">7.0.1.</span> <span class="nav-text">http2和http1区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Koa"><span class="nav-number">8.</span> <span class="nav-text">Koa</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#koa-route原理"><span class="nav-number">8.0.1.</span> <span class="nav-text">koa-route原理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序算法"><span class="nav-number">9.</span> <span class="nav-text">排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序"><span class="nav-number">9.0.1.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序"><span class="nav-number">9.0.2.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择排序"><span class="nav-number">9.0.3.</span> <span class="nav-text">选择排序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全问题"><span class="nav-number">10.</span> <span class="nav-text">安全问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XSS"><span class="nav-number">10.0.1.</span> <span class="nav-text">XSS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSRF"><span class="nav-number">10.0.2.</span> <span class="nav-text">CSRF</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">威少</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://weishao.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/01/18/interview/';
+          this.page.identifier = '2019/01/18/interview/';
+          this.page.title = 'interview';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://weishao.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
